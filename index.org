@@ -3,7 +3,9 @@
 #+DATE: {{{time(%B %d\, %Y)}}}
 #+OPTIONS: toc:nil num:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="Dreamsongs.css" />
-
+ [[mailto:mail@andrewmetzner.com][mail@andrewmetzner.com]] \\
+ Donations: *[LTC]* ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze
+ 
 * Description
 :PROPERTIES:
 :CUSTOM_ID: description
@@ -27,9 +29,8 @@ Welcome. This page documents all of my research and academic work. It also stand
   Andrew Metzner \\
   *Advisors*: Professor Vera Hu, Professor Krystyna Janicka-Wlodek, Maciej Wlodek, Ph.D.
 
-* Comments & Donations
+* Certified I am a human
 :PROPERTIES:
 :CUSTOM_ID: sidebar
 :END:
-- Comments? Mail to [[mailto:mail@andrewmetzner.com][mail@andrewmetzner.com]]
-- Donations: *[LTC]* ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze
+Proof here
