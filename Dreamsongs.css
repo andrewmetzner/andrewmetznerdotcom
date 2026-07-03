@@ -51,6 +51,18 @@ body {
     letter-spacing: -1px;
 }
 
+/* Contact/donations line: raw text preceding the first headline in
+   index.org, exported as a bare <p> right after the title. Selected via
+   adjacent-sibling since it has no id/class of its own. */
+.title + p {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    margin: 10px 0 0 0;
+    order: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
 h2 {
     font-family: var(--font-sans);
     font-size: 16px;
@@ -187,6 +199,7 @@ blockquote p {
         column-gap: 50px;
         grid-template-areas:
             "title    title"
+            "contact  contact"
             "desc     desc"
             "nav      nav"
             "papers   sidebar"
@@ -196,6 +209,10 @@ blockquote p {
     .title {
         grid-area: title;
         text-align: left;
+    }
+
+    .title + p {
+        grid-area: contact;
     }
 
     #outline-container-description {
