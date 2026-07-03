@@ -1,0 +1,250 @@
+:root {
+    --bg-color: #ffcc99;
+    --text-color: #000000;
+    --link-color: #7b0a2a;
+    --link-hover: #c00d3f;
+    --font-serif: Georgia, AGaramond, "Times New Roman", serif;
+    --font-sans: Arial, Helvetica, sans-serif;
+    --max-width: 1024px;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--bg-color);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 20px;
+}
+
+/*
+   Layout: title -> description -> navbar -> (papers | sidebar) -> postamble.
+   Sections are targeted by the CUSTOM_ID set on each headline in index.org
+   (#outline-container-<id>) so the layout survives re-exports; Org's default
+   auto-generated ids are random per export and would silently break this CSS.
+*/
+#content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+}
+
+.title {
+    font-family: var(--font-serif);
+    font-size: 38px;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--link-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+}
+
+h3 {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+.outline-2 {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.outline-3 {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+blockquote p {
+    margin: 0;
+}
+
+.org-ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.org-ul li {
+    margin-bottom: 6px;
+}
+
+/* Description: shown right under the title, heading hidden */
+#outline-container-description {
+    order: 1;
+}
+
+#outline-container-description h2 {
+    display: none;
+}
+
+#outline-container-description blockquote {
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    border: none;
+}
+
+/* Navigation: horizontal navbar for the main project link(s), heading hidden */
+#outline-container-navigation {
+    order: 2;
+    margin-bottom: 10px;
+}
+
+#outline-container-navigation h2 {
+    display: none;
+}
+
+#outline-container-navigation .org-ul {
+    list-style-type: none;
+    padding: 6px 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+#outline-container-navigation .org-ul li {
+    margin: 0;
+    display: inline;
+    font-family: var(--font-sans);
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* Research papers list: main content column */
+#outline-container-papers {
+    order: 3;
+}
+
+/* Sidebar: comments / donations */
+#outline-container-sidebar {
+    order: 4;
+}
+
+#postamble {
+    order: 5;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px #000 double;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: #333;
+}
+
+#postamble p {
+    margin: 3px 0;
+}
+
+@media (min-width: 769px) {
+    #content {
+        grid-template-columns: 1fr 280px;
+        column-gap: 50px;
+        grid-template-areas:
+            "title    title"
+            "desc     desc"
+            "nav      nav"
+            "papers   sidebar"
+            "postamble postamble";
+    }
+
+    .title {
+        grid-area: title;
+        text-align: left;
+    }
+
+    #outline-container-description {
+        grid-area: desc;
+    }
+
+    #outline-container-navigation {
+        grid-area: nav;
+    }
+
+    #outline-container-navigation .org-ul {
+        justify-content: flex-start;
+    }
+
+    #outline-container-papers {
+        grid-area: papers;
+    }
+
+    #outline-container-sidebar {
+        grid-area: sidebar;
+        border-left: 1px dashed rgba(0, 0, 0, 0.2);
+        padding-left: 25px;
+    }
+
+    #postamble {
+        grid-area: postamble;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #outline-container-description {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    #outline-container-navigation .org-ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    #outline-container-sidebar {
+        margin-top: 20px;
+        border-top: 1px dashed rgba(0, 0, 0, 0.2);
+        padding-top: 20px;
+    }
+
+    .org-ul li {
+        margin-bottom: 10px;
+    }
+}

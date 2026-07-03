@@ -1,0 +1,33 @@
+#+TITLE: Andrew Metzner
+#+AUTHOR: Andrew Metzner
+#+DATE: {{{time(%B %d\, %Y)}}}
+#+OPTIONS: toc:nil num:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="Dreamsongs.css" />
+
+* Description
+:PROPERTIES:
+:CUSTOM_ID: description
+:END:
+#+BEGIN_QUOTE
+Welcome. This page documents all of my research and academic work. It also stands as a portal to other web projects.
+#+END_QUOTE
+
+* Navigation
+:PROPERTIES:
+:CUSTOM_ID: navigation
+:END:
+- [[https://unluckylisp.com][Unluckylisp project]]
+- [[https://github.com/andrewmetzner][github]]
+
+* Research Papers & Documents
+:PROPERTIES:
+:CUSTOM_ID: papers
+:END:
+- [[/research/Fractals_ Mathematical Foundations and Historical Evolution.pdf][Fractals - Mathematical Foundations and Historical Evolution]]
+
+* Comments & Donations
+:PROPERTIES:
+:CUSTOM_ID: sidebar
+:END:
+- Comments? Mail to [[mailto:mail@andrewmetzner.com][mail@andrewmetzner.com]]
+- Donations: *[LTC]* ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze
