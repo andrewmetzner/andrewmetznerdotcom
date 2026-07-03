@@ -5,6 +5,13 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="Dreamsongs.css" />
 #+HTML_HEAD: <link rel="icon" type="image/png" href="favicon.png" />
 #+HTML_HEAD: <link rel="icon" type="image/x-icon" href="favicon.ico" />
+#+HTML_HEAD: <meta property="og:title" content="Andrew Metzner" />
+#+HTML_HEAD: <meta property="og:description" content="Research, academic work, and web projects." />
+#+HTML_HEAD: <meta property="og:image" content="https://andrewmetzner.com/og-image.png" />
+#+HTML_HEAD: <meta property="og:url" content="https://andrewmetzner.com/" />
+#+HTML_HEAD: <meta property="og:type" content="website" />
+#+HTML_HEAD: <meta name="twitter:card" content="summary_large_image" />
+#+HTML_HEAD: <meta name="twitter:image" content="https://andrewmetzner.com/og-image.png" />
 
 * Description
 :PROPERTIES:
