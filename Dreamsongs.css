@@ -51,18 +51,6 @@ body {
     letter-spacing: -1px;
 }
 
-/* Contact/donations line: raw text preceding the first headline in
-   index.org, exported as a bare <p> right after the title. Selected via
-   adjacent-sibling since it has no id/class of its own. */
-.title + p {
-    font-family: var(--font-sans);
-    font-size: 12px;
-    margin: -20px 0 0 0;
-    order: 0;
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
-
 h2 {
     font-family: var(--font-sans);
     font-size: 16px;
@@ -119,11 +107,18 @@ blockquote p {
 
 #outline-container-description {
     order: 1;
-    margin-top: -30px;
+    margin-top: -48px;
 }
 
 #outline-container-description h2 {
     display: none;
+}
+
+#outline-container-description > .outline-text-2 > p {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 #outline-container-description blockquote {
@@ -199,7 +194,6 @@ blockquote p {
         column-gap: 50px;
         grid-template-areas:
             "title    title"
-            "contact  contact"
             "desc     desc"
             "nav      nav"
             "papers   sidebar"
@@ -209,10 +203,6 @@ blockquote p {
     .title {
         grid-area: title;
         text-align: left;
-    }
-
-    .title + p {
-        grid-area: contact;
     }
 
     #outline-container-description {
@@ -273,5 +263,54 @@ blockquote p {
 
     .org-ul li {
         margin-bottom: 10px;
+    }
+}
+
+/* 404 page */
+.notfound-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.notfound-content .title {
+    text-align: center;
+}
+
+.notfound-kittens {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.notfound-kittens pre {
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0;
+    display: inline-block;
+    text-align: left;
+}
+
+.notfound-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 18px;
+    margin: 0;
+}
+
+.notfound-home a {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+    .notfound-kittens pre {
+        font-size: 11px;
     }
 }
