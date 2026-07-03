@@ -120,6 +120,7 @@ blockquote p {
 /* Description: shown right under the title, heading hidden */
 #outline-container-description {
     order: 1;
+    margin-top: -16px;
 }
 
 #outline-container-description h2 {
