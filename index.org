@@ -3,13 +3,14 @@
 #+DATE: {{{time(%B %d\, %Y)}}}
 #+OPTIONS: toc:nil num:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="Dreamsongs.css" />
- [[mailto:mail@andrewmetzner.com][mail@andrewmetzner.com]] \\
- Donations: *[LTC]* ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze
- 
+
 * Description
 :PROPERTIES:
 :CUSTOM_ID: description
 :END:
+ [[mailto:mail@andrewmetzner.com][mail@andrewmetzner.com]] \\
+ Donations: *[LTC]* ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze
+ 
 #+BEGIN_QUOTE
 Welcome. This page documents all of my research and academic work. It also stands as a portal to other web projects.
 #+END_QUOTE
