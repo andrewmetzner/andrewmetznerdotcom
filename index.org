@@ -6,7 +6,7 @@
 #+HTML_HEAD: <link rel="icon" type="image/png" href="favicon.png" />
 #+HTML_HEAD: <link rel="icon" type="image/x-icon" href="favicon.ico" />
 #+HTML_HEAD: <meta property="og:title" content="Andrew Metzner" />
-#+HTML_HEAD: <meta property="og:description" content="Research, academic work, and web projects." />
+#+HTML_HEAD: <meta property="og:description" content="I like solving problems" />
 #+HTML_HEAD: <meta property="og:image" content="https://andrewmetzner.com/og-image.png" />
 #+HTML_HEAD: <meta property="og:url" content="https://andrewmetzner.com/" />
 #+HTML_HEAD: <meta property="og:type" content="website" />
