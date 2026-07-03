@@ -23,7 +23,7 @@ Welcome. This page documents all of my research and academic work. It also stand
 :PROPERTIES:
 :CUSTOM_ID: papers
 :END:
-- [[/research/Fractals_ Mathematical Foundations and Historical Evolution.pdf][Fractals - Mathematical Foundations and Historical Evolution]] \\
+- [[./research/Fractals_%20Mathematical%20Foundations%20and%20Historical%20Evolution.pdf][Fractals - Mathematical Foundations and Historical Evolution]] \\
   Andrew Metzner \\
   *Advisors*: Professor Vera Hu, Professor Krystyna Janicka-Wlodek, Maciej Wlodek, Ph.D.
 
