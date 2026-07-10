@@ -1,0 +1,15 @@
+#+TITLE: Readings (data for build/readings.el)
+# One headline per book, NEWEST FIRST. The headline text is the title.
+# AUTHOR / DATE / STARS live in the property drawer; the text under the
+# headline is the review and may use Org markup (*bold*, /italic/, [[links]]).
+# DATE accepts a plain date (2026-07-10) or a full ISO 8601 date-time with
+# offset (2026-07-10T02:09:38-04:00). Blank is allowed too.
+# Rebuild with:  emacs --batch -l build/readings.el   (or build/build.el)
+
+# * The Tibetan Yogas of Dream and Sleep
+# :PROPERTIES:
+# :AUTHOR: Tenzin Wangyal Rinpoche
+# :DATE: 
+# :STARS:
+# :END:
+# Hello world

@@ -5,6 +5,7 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="Dreamsongs.css" />
 #+HTML_HEAD: <link rel="icon" type="image/png" href="favicon.png" />
 #+HTML_HEAD: <link rel="icon" type="image/x-icon" href="favicon.ico" />
+#+HTML_HEAD: <link rel="alternate" type="application/rss+xml" title="Andrew Metzner: Readings" href="https://andrewmetzner.com/readings.xml" />
 #+HTML_HEAD: <meta name="description" content="Andrew Metzner's personal site: research papers, academic work, and a portal to his web projects." />
 #+HTML_HEAD: <meta property="og:title" content="Andrew Metzner" />
 #+HTML_HEAD: <meta property="og:description" content="I like solving problems" />
@@ -29,6 +30,7 @@ Welcome. This page documents all of my research and academic work. It also stand
 :PROPERTIES:
 :CUSTOM_ID: navigation
 :END:
+- [[./readings.html][recent readings]]
 - [[https://unluckylisp.com][Unluckylisp project]]
 - [[https://github.com/andrewmetzner][github]]
 
@@ -40,8 +42,14 @@ Welcome. This page documents all of my research and academic work. It also stand
   Andrew Metzner \\
   *Advisors*: Professor Vera Hu, Professor Krystyna Janicka-Wlodek, Maciej Wlodek, Ph.D.
 
+* Recent Reads
+:PROPERTIES:
+:CUSTOM_ID: recent
+:END:
+#+INCLUDE: "../part/recent-readings.html" export html
+
 * Certified I am a human
 :PROPERTIES:
-:CUSTOM_ID: sidebar
+:CUSTOM_ID: human
 :END:
-Proof here
+[[./im-a-human][Proof here]]

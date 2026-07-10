@@ -5,6 +5,7 @@
     --link-hover: #c00d3f;
     --font-serif: Georgia, AGaramond, "Times New Roman", serif;
     --font-sans: Arial, Helvetica, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
     --max-width: 1024px;
 }
 
@@ -29,12 +30,6 @@ body {
     overflow-x: hidden;
 }
 
-/*
-   Layout: title -> description -> navbar -> (papers | sidebar) -> postamble.
-   Sections are targeted by the CUSTOM_ID set on each headline in index.org
-   (#outline-container-<id>) so the layout survives re-exports; Org's default
-   auto-generated ids are random per export and would silently break this CSS.
-*/
 #content {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -49,6 +44,7 @@ body {
     font-weight: bold;
     margin: 10px 0 0 0;
     letter-spacing: -1px;
+    text-align: left;
 }
 
 h2 {
@@ -108,6 +104,8 @@ blockquote p {
 #outline-container-description {
     order: 1;
     margin-top: -48px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--text-color);
 }
 
 #outline-container-description h2 {
@@ -128,10 +126,9 @@ blockquote p {
     border: none;
 }
 
-/* Navigation: horizontal navbar for the main project link(s), heading hidden */
 #outline-container-navigation {
     order: 2;
-    margin-bottom: 10px;
+    margin-top: -20px;
 }
 
 #outline-container-navigation h2 {
@@ -140,42 +137,70 @@ blockquote p {
 
 #outline-container-navigation .org-ul {
     list-style-type: none;
-    padding: 6px 0;
+    padding: 0;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
+    align-items: baseline;
 }
 
 #outline-container-navigation .org-ul li {
     margin: 0;
-    display: inline;
     font-family: var(--font-sans);
     font-weight: bold;
     font-size: 13px;
-    text-transform: uppercase;
 }
 
-/* Research papers list: main content column */
+#outline-container-navigation .org-ul li:not(:last-child)::after {
+    content: " // ";
+    white-space: pre;
+    font-weight: bold;
+}
+
 #outline-container-papers {
     order: 3;
 }
 
-/* Sidebar: comments / donations */
-#outline-container-sidebar {
+#outline-container-recent {
     order: 4;
 }
 
-#outline-container-sidebar li {
+#outline-container-recent li {
     overflow-wrap: break-word;
     word-break: break-word;
 }
 
-#postamble {
+#outline-container-human {
     order: 5;
+    margin-top: 8px;
+    max-width: 320px;
+    padding: 12px 16px;
+    border: 1px dashed var(--link-color);
+    background: rgba(123, 10, 42, 0.06);
+    font-family: var(--font-mono);
+}
+
+#outline-container-human h2 {
+    margin-bottom: 8px;
+    border: none;
+    color: var(--link-color);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+#outline-container-human h2::before {
+    content: "+ ";
+}
+
+#outline-container-human p {
+    margin: 0;
+    font-size: 12px;
+}
+
+#postamble {
+    order: 6;
     margin-top: 20px;
     padding-top: 15px;
     border-top: 1px #000 double;
@@ -188,50 +213,6 @@ blockquote p {
     margin: 3px 0;
 }
 
-@media (min-width: 769px) {
-    #content {
-        grid-template-columns: 1fr 280px;
-        column-gap: 50px;
-        grid-template-areas:
-            "title    title"
-            "desc     desc"
-            "nav      nav"
-            "papers   sidebar"
-            "postamble postamble";
-    }
-
-    .title {
-        grid-area: title;
-        text-align: left;
-    }
-
-    #outline-container-description {
-        grid-area: desc;
-    }
-
-    #outline-container-navigation {
-        grid-area: nav;
-    }
-
-    #outline-container-navigation .org-ul {
-        justify-content: flex-start;
-    }
-
-    #outline-container-papers {
-        grid-area: papers;
-    }
-
-    #outline-container-sidebar {
-        grid-area: sidebar;
-        border-left: 1px dashed rgba(0, 0, 0, 0.2);
-        padding-left: 25px;
-    }
-
-    #postamble {
-        grid-area: postamble;
-    }
-}
-
 @media (max-width: 768px) {
     body {
         padding: 15px;
@@ -239,34 +220,183 @@ blockquote p {
 
     .title {
         font-size: 28px;
-        text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
-    #outline-container-description {
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    #outline-container-navigation .org-ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 0;
-    }
-
-    #outline-container-sidebar {
-        margin-top: 20px;
-        border-top: 1px dashed rgba(0, 0, 0, 0.2);
-        padding-top: 20px;
-    }
-
-    .org-ul li {
-        margin-bottom: 10px;
+    #outline-container-recent,
+    #outline-container-human {
+        margin-top: 6px;
     }
 }
 
-/* 404 page */
+.readings-meta {
+    margin: 4px 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #333;
+}
+
+hr.rule {
+    border: none;
+    border-top: 1px solid var(--text-color);
+    margin: 12px 0;
+}
+
+.readings {
+    margin-top: 4px;
+}
+
+.readings-head,
+.reading-row {
+    display: grid;
+    grid-template-columns: 7em 1fr 100px;
+    gap: 4px 18px;
+    align-items: center;
+}
+
+.readings-head {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--link-color);
+    padding-bottom: 6px;
+    border-bottom: 1px solid #000;
+}
+
+.readings-head .col-rating {
+    text-align: right;
+}
+
+.reading {
+    padding: 14px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.reading-date {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: #555;
+    white-space: nowrap;
+}
+
+.reading-time {
+    display: block;
+    font-size: 11px;
+    color: #888;
+}
+
+.reading-title {
+    font-family: var(--font-serif);
+    font-size: 15px;
+}
+
+.reading-title cite {
+    font-style: italic;
+}
+
+.reading-rating {
+    text-align: right;
+}
+
+.stars {
+    display: inline-block;
+    width: 90px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.stars-sm {
+    width: 72px;
+    height: 14px;
+}
+
+.reading-review {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.55;
+    color: #2a2a2a;
+    max-width: 62ch;
+    margin: 8px 0 0 0;
+}
+
+.reading-review p {
+    margin: 0;
+}
+
+.reading-review p + p {
+    margin-top: 0.6em;
+}
+
+.recent-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-list li {
+    margin-bottom: 12px;
+    font-family: var(--font-serif);
+    font-size: 14px;
+}
+
+.recent-list cite {
+    font-style: italic;
+}
+
+.recent-date {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: #555;
+}
+
+.recent-more {
+    margin: 12px 0 0 0;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.readings-empty,
+.recent-empty {
+    margin: 4px 0 0 0;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-style: italic;
+    color: #555;
+}
+
+@media (max-width: 600px) {
+    .readings-head {
+        display: none;
+    }
+
+    .reading-row {
+        grid-template-columns: 1fr auto;
+        gap: 2px 12px;
+    }
+
+    .reading-date {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .reading-rating {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .reading-title {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        margin-top: 3px;
+    }
+}
+
 .notfound-content {
     max-width: var(--max-width);
     margin: 0 auto;
