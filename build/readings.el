@@ -17,8 +17,7 @@
 (require 'cl-lib)
 
 (defvar amz-root
-  (expand-file-name ".." (file-name-directory (or load-file-name buffer-file-name default-directory)))
-  )
+  (expand-file-name ".." (file-name-directory (or load-file-name buffer-file-name default-directory))))
 
 (defvar amz-readings-org (expand-file-name "org/readings.org" amz-root))
 (defvar amz-site "https://andrewmetzner.com")
@@ -105,6 +104,30 @@ Falls back to the current time when DATE is missing or blank."
 (defun amz-out (name)
   (expand-file-name name amz-root))
 
+(defun amz-file-hash (path)
+  "Short content hash of PATH, or nil when the file does not exist."
+  (when (file-exists-p path)
+    (substring (secure-hash 'md5 (with-temp-buffer
+                                   (insert-file-contents-literally path)
+                                   (buffer-string)))
+               0 8)))
+
+(defun amz-stamp-assets (html-file)
+  "Append a content-hash ?v= query to the CSS and favicon references in
+HTML-FILE so browsers and home-screen apps refetch them the moment the files
+change (and keep their cache while the files are unchanged)."
+  (let ((assets (list (cons "Dreamsongs.css" (amz-file-hash (amz-out "Dreamsongs.css")))
+                      (cons "favicon.png"    (amz-file-hash (amz-out "favicon.png")))
+                      (cons "favicon.ico"    (amz-file-hash (amz-out "favicon.ico"))))))
+    (with-temp-buffer
+      (insert-file-contents html-file)
+      (dolist (a assets)
+        (when (cdr a)
+          (goto-char (point-min))
+          (while (search-forward (format "\"%s\"" (car a)) nil t)
+            (replace-match (format "\"%s?v=%s\"" (car a) (cdr a)) t t))))
+      (write-region (point-min) (point-max) html-file nil 'silent))))
+
 ;;; Reading
 
 (defun amz-reading-html (e)
@@ -164,6 +187,8 @@ Falls back to the current time when DATE is missing or blank."
 </html>
 "
                       amz-site amz-site amz-site amz-site body)))
+    ;; Push version strings into readings.html right after creating it
+    (amz-stamp-assets (amz-out "readings.html"))
     (message "Wrote readings.html (%d entries)" (length readings))))
 
 ;;; RSS feed

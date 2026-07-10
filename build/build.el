@@ -24,7 +24,7 @@
 (let* ((here (file-name-directory (or load-file-name buffer-file-name default-directory)))
        (root (expand-file-name ".." here))
        (org-dir (expand-file-name "org" root)))
-  (load (expand-file-name "readings.el" here))
+ (load (expand-file-name "readings.el" here))
   (dolist (page amz-pages)
     (let ((src (expand-file-name page org-dir))
           (out (expand-file-name (concat (file-name-base page) ".html") root))
@@ -32,7 +32,9 @@
       (with-current-buffer (find-file-noselect src)
         (message "Exporting %s -> %s" page out)
         (org-export-to-file 'html out)
-        (kill-buffer))))
+        (kill-buffer))
+ (when (fboundp 'amz-stamp-assets)
+        (amz-stamp-assets out))))
   (message "Build complete."))
 
 ;;; build.el ends here
