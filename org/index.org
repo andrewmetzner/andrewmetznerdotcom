@@ -53,12 +53,14 @@ Welcome. This page documents all of my research and academic work. It also stand
 :END:
 [[./im-a-human][Proof here]]
 
-* Tributes
+* send if you can, don't give your last
 :PROPERTIES:
 :CUSTOM_ID: tributes
 :END:
 @@html:<small>@@
-*[LTC]* [[litecoin:ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze][ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze]] \\
-*[XMR]* [[monero:85NrACEeSRPX3PiDkNzeNZWrLzv5V4hQy8MdrKMBnWNCXTY1gGjJzL1cpTrCdnQogB1aBCiSBrnYNHbEeGU5YZ4gRY3Y1Wy][85NrACEeSRPX3PiDkNzeNZWrLzv5V4hQy8MdrKMBnWNCXTY1gGjJzL1cpTrCdnQogB1aBCiSBrnYNHbEeGU5YZ4gRY3Y1Wy]]
+*[LTC]* \\
+[[litecoin:ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze][ltc1q2x72g79uys6q535wswgw3gtxes63dwxg28ghze]] \\
+*[XMR]* \\
+[[monero:85NrACEeSRPX3PiDkNzeNZWrLzv5V4hQy8MdrKMBnWNCXTY1gGjJzL1cpTrCdnQogB1aBCiSBrnYNHbEeGU5YZ4gRY3Y1Wy][85NrACEeSRPX3PiDkNzeNZWrLzv5V4hQy8MdrKMBnWNCXTY1gGjJzL1cpTrCdnQogB1aBCiSBrnYNHbEeGU5YZ4gRY3Y1Wy]]
 @@html:</small>@@
 
