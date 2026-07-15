@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>*rbt-visualizer*</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="emacs-frame">
+
+    <div class="main-area">
+      <div class="canvas-pane">
+        <div class="canvas-container" id="canvasContainer">
+          <canvas id="canvas"></canvas>
+        </div>
+      </div>
+
+      <div class="sidebar" id="sidebar">
+        <div class="buffer-tabs">
+          <button class="buffer-tab active" data-buffer="buf-log" type="button">*log*</button>
+          <button class="buffer-tab" data-buffer="buf-rules" type="button">*rules*</button>
+        </div>
+        <div class="buffer-content active" id="buf-log">
+          <div class="log-content" id="logList"></div>
+        </div>
+        <div class="buffer-content" id="buf-rules">
+          <div class="rules-content">
+            <strong>;; Red-Black Tree invariants</strong>
+            <ol>
+              <li>Every node is RED or BLACK.</li>
+              <li>The root is BLACK.</li>
+              <li>Every leaf (nil) is BLACK.</li>
+              <li>A RED node has two BLACK children.</li>
+              <li>Every root to leaf path has the same number of BLACK nodes.</li>
+            </ol>
+            <p class="hint">;; black cats are BLACK nodes, red cats are RED nodes.<br>
+            ;; scroll to zoom, drag to pan the buffer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mode-line">
+      <span class="mode-flags">-:**-</span>
+      <span class="mode-line-name">rbt-visualizer.el</span>
+      <span class="mode-sep">Nodes: <b id="nodeCount">0</b></span>
+      <span class="mode-sep">Black-height: <b id="blackHeight">0</b></span>
+      <span class="mode-line-fill"></span>
+      <span class="mode-sep">(Lisp Interaction)</span>
+      <button id="sidebarToggle" class="mode-line-btn" type="button">[log]</button>
+    </div>
+
+    <div class="minibuffer">
+      <label for="value" class="mb-prompt">Key:</label>
+      <input id="value" type="text" placeholder="e.g. Whiskers" autocomplete="off" />
+      <button id="insertButton" type="button" class="mb-btn">Ins</button>
+      <button id="removeButton" type="button" class="mb-btn">Del</button>
+      <span id="status" class="status">Ready.</span>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
