@@ -414,7 +414,7 @@ function paintFrame(posMap, effect) {
         ctx.fillStyle = '#6b7280';
         ctx.font = '14px "Courier New", monospace';
         ctx.textAlign = 'left';
-        ctx.fillText(';; empty tree -- type a name below and press Ins', 16, 24);
+        ctx.fillText(';; empty tree', 16, 24);
         return;
     }
 
