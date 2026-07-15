@@ -1,5 +1,16 @@
 'use strict';
 
+function syncAppHeight() {
+    const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    document.documentElement.style.setProperty('--app-height', `${h}px`);
+}
+syncAppHeight();
+window.addEventListener('resize', syncAppHeight);
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', syncAppHeight);
+    window.visualViewport.addEventListener('scroll', syncAppHeight);
+}
+
 const valueInput = document.getElementById('value');
 const insertButton = document.getElementById('insertButton');
 const removeButton = document.getElementById('removeButton');
@@ -407,7 +418,7 @@ function paintFrame(posMap, effect) {
         return;
     }
 
-    const centerX = rect.width / (2 * scale) - offsetX;
+    const centerX = rect.width / (2 * scale);
     const rootY = 40;
 
     ctx.strokeStyle = '#4b5563'; ctx.lineWidth = 2;

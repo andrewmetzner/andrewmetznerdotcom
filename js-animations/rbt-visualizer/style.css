@@ -5,6 +5,8 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
   background: #b8b8b8;
   font-family: "Menlo", "DejaVu Sans Mono", "Consolas", "Courier New", monospace;
   font-size: 13px;
@@ -15,6 +17,7 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: var(--app-height, 100vh);
   border: 2px solid #6d6d6d;
 }
 
@@ -111,6 +114,7 @@ html, body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  touch-action: pan-y;
   padding: 6px 8px;
   font-size: 12px;
   white-space: pre-wrap;
@@ -132,6 +136,7 @@ html, body {
   font-size: 12.5px;
   line-height: 1.55;
   overflow-y: auto;
+  touch-action: pan-y;
 }
 
 .rules-content ol { margin: 8px 0 0; padding-left: 20px; }
