@@ -130,13 +130,13 @@ function* insertGen(name) {
     yield { type: 'insert-leaf', node };
 
     if (node.parent === null) {
-        yield* recolorBatch([{ node, to: 'BLACK' }], `${name} is the root — recolored BLACK`);
+        yield* recolorBatch([{ node, to: 'BLACK' }], `${name} is the root -- recolored BLACK`);
         setStatus(`Inserted "${name}" as the root.`, 'ok');
         refreshStats();
         return;
     }
     if (node.parent.parent === null) {
-        setStatus(`Inserted "${name}". Parent is the root — no fixup needed.`, 'ok');
+        setStatus(`Inserted "${name}". Parent is the root -- no fixup needed.`, 'ok');
         refreshStats();
         return;
     }
@@ -153,7 +153,7 @@ function* fixInsertGen(k) {
             if (u.color === 'RED') {
                 yield* recolorBatch(
                     [{ node: u, to: 'BLACK' }, { node: k.parent, to: 'BLACK' }, { node: k.parent.parent, to: 'RED' }],
-                    `${k.name}'s parent ${k.parent.name} is RED (rule 4 violated) and uncle ${u.name} is also RED — recolor parent+uncle BLACK, grandparent ${k.parent.parent.name} RED, continue from ${k.parent.parent.name}`);
+                    `${k.name}'s parent ${k.parent.name} is RED (rule 4 violated) and uncle ${u.name} is also RED -- recolor parent+uncle BLACK, grandparent ${k.parent.parent.name} RED, continue from ${k.parent.parent.name}`);
                 k = k.parent.parent;
             } else {
                 if (k === k.parent.left) {
@@ -162,7 +162,7 @@ function* fixInsertGen(k) {
                 }
                 yield* recolorBatch(
                     [{ node: k.parent, to: 'BLACK' }, { node: k.parent.parent, to: 'RED' }],
-                    `${k.name}'s parent ${k.parent.name} is RED but uncle is BLACK — recolor parent BLACK, grandparent ${k.parent.parent.name} RED, then rotate`);
+                    `${k.name}'s parent ${k.parent.name} is RED but uncle is BLACK -- recolor parent BLACK, grandparent ${k.parent.parent.name} RED, then rotate`);
                 yield* rotateLeftStep(k.parent.parent);
             }
         } else {
@@ -170,7 +170,7 @@ function* fixInsertGen(k) {
             if (u.color === 'RED') {
                 yield* recolorBatch(
                     [{ node: u, to: 'BLACK' }, { node: k.parent, to: 'BLACK' }, { node: k.parent.parent, to: 'RED' }],
-                    `${k.name}'s parent ${k.parent.name} is RED (rule 4 violated) and uncle ${u.name} is also RED — recolor parent+uncle BLACK, grandparent ${k.parent.parent.name} RED, continue from ${k.parent.parent.name}`);
+                    `${k.name}'s parent ${k.parent.name} is RED (rule 4 violated) and uncle ${u.name} is also RED -- recolor parent+uncle BLACK, grandparent ${k.parent.parent.name} RED, continue from ${k.parent.parent.name}`);
                 k = k.parent.parent;
             } else {
                 if (k === k.parent.right) {
@@ -179,7 +179,7 @@ function* fixInsertGen(k) {
                 }
                 yield* recolorBatch(
                     [{ node: k.parent, to: 'BLACK' }, { node: k.parent.parent, to: 'RED' }],
-                    `${k.name}'s parent ${k.parent.name} is RED but uncle is BLACK — recolor parent BLACK, grandparent ${k.parent.parent.name} RED, then rotate`);
+                    `${k.name}'s parent ${k.parent.name} is RED but uncle is BLACK -- recolor parent BLACK, grandparent ${k.parent.parent.name} RED, then rotate`);
                 yield* rotateRightStep(k.parent.parent);
             }
         }
@@ -204,7 +204,7 @@ function* removeGen(name) {
     const z = searchTree(root, name);
     if (z === TNULL) {
         setStatus(`"${name}" was not found.`, 'warn');
-        log(`remove(${name}) — not found`);
+        log(`remove(${name}) -- not found`);
         return;
     }
 
@@ -255,7 +255,7 @@ function* deleteFixGen(x) {
             let s = x.parent.right;
             if (s.color === 'RED') {
                 yield* recolorBatch([{ node: s, to: 'BLACK' }, { node: x.parent, to: 'RED' }],
-                    `${x.name || 'the double-black node'}'s sibling ${s.name} is RED — recolor sibling BLACK, parent ${x.parent.name} RED, then rotate`);
+                    `${x.name || 'the double-black node'}'s sibling ${s.name} is RED -- recolor sibling BLACK, parent ${x.parent.name} RED, then rotate`);
                 yield* rotateLeftStep(x.parent);
                 s = x.parent.right;
             }
