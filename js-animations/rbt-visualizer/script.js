@@ -537,6 +537,58 @@ canvas.addEventListener('wheel', (e) => {
     if (!animating) scheduleRender();
 }, { passive: false });
 
+let pinchState = null;
+
+function getPinchState(e) {
+    const t0 = e.touches[0], t1 = e.touches[1];
+    const dx = t1.clientX - t0.clientX, dy = t1.clientY - t0.clientY;
+    return { dist: Math.hypot(dx, dy), midX: (t0.clientX + t1.clientX) / 2, midY: (t0.clientY + t1.clientY) / 2 };
+}
+
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (e.touches.length === 1) {
+        pinchState = null;
+        isPanning = true;
+        panStartX = e.touches[0].clientX; panStartY = e.touches[0].clientY;
+        lastPanX = offsetX; lastPanY = offsetY;
+    } else if (e.touches.length === 2) {
+        isPanning = false;
+        pinchState = getPinchState(e);
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (e.touches.length === 1 && isPanning) {
+        offsetX = lastPanX + (e.touches[0].clientX - panStartX) / scale;
+        offsetY = lastPanY + (e.touches[0].clientY - panStartY) / scale;
+        if (!animating) scheduleRender();
+    } else if (e.touches.length === 2 && pinchState) {
+        const rect = canvas.getBoundingClientRect();
+        const next = getPinchState(e);
+        const mx = next.midX - rect.left, my = next.midY - rect.top;
+        const worldX = (mx - offsetX * scale) / scale, worldY = (my - offsetY * scale) / scale;
+        const factor = next.dist / pinchState.dist;
+        scale = Math.min(3, Math.max(0.2, scale * factor));
+        offsetX = (mx / scale) - worldX; offsetY = (my / scale) - worldY;
+        pinchState = next;
+        if (!animating) scheduleRender();
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0) {
+        isPanning = false;
+        pinchState = null;
+    } else if (e.touches.length === 1) {
+        pinchState = null;
+        isPanning = true;
+        panStartX = e.touches[0].clientX; panStartY = e.touches[0].clientY;
+        lastPanX = offsetX; lastPanY = offsetY;
+    }
+}, { passive: false });
+
 window.addEventListener('resize', () => { if (!animating) scheduleRender(); });
 
 const canvasResizeObserver = new ResizeObserver(() => {
@@ -546,13 +598,21 @@ canvasResizeObserver.observe(container);
 
 const sidebar = document.getElementById('sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 const bufferTabs = document.querySelectorAll('.buffer-tab');
 const buffers = document.querySelectorAll('.buffer-content');
+
+function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarToggle.textContent = '[log]';
+}
 
 sidebarToggle.addEventListener('click', () => {
     sidebar.classList.toggle('open');
     sidebarToggle.textContent = sidebar.classList.contains('open') ? '[hide]' : '[log]';
 });
+
+sidebarBackdrop.addEventListener('click', closeSidebar);
 
 bufferTabs.forEach(tab => {
     tab.addEventListener('click', () => {

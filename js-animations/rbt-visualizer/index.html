@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="favicon.png?v=08accfc1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico?v=a508454a" />
-
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="favicon.png?v=08accfc1" />
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=a508454a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>*rbt-visualizer*</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -38,19 +37,20 @@
               <li>Every root to leaf path has the same number of BLACK nodes.</li>
             </ol>
             <p class="hint">;; black cats are BLACK nodes, red cats are RED nodes.<br>
-            ;; scroll to zoom, drag to pan the buffer.</p>
+            ;; scroll/pinch to zoom, drag/swipe to pan the buffer.</p>
           </div>
         </div>
       </div>
+      <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
     </div>
 
     <div class="mode-line">
       <span class="mode-flags">-:**-</span>
-      <span class="mode-line-name">rbt-visualizer.el</span>
+      <span class="mode-line-name">rbt-visualizer</span>
       <span class="mode-sep">Nodes: <b id="nodeCount">0</b></span>
       <span class="mode-sep">Black-height: <b id="blackHeight">0</b></span>
       <span class="mode-line-fill"></span>
-      <span class="mode-sep">(Lisp Interaction)</span>
+      <span class="mode-sep mode-line-lisp"></span>
       <button id="sidebarToggle" class="mode-line-btn" type="button">[log]</button>
     </div>
 
