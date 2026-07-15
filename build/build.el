@@ -19,6 +19,9 @@
       org-html-postamble-format
       '(("en" "<p class=\"postamble\">Last modified: %C<br />%c</p>")))
 
+(dolist (type '("litecoin" "monero"))
+  (org-link-set-parameters type))
+
 (defvar amz-pages '("index.org"))
 
 (let* ((here (file-name-directory (or load-file-name buffer-file-name default-directory)))

@@ -199,8 +199,24 @@ blockquote p {
     font-size: 12px;
 }
 
-#postamble {
+#outline-container-tributes {
     order: 6;
+    margin-top: 8px;
+}
+
+#outline-container-tributes h2 {
+    display: none;
+}
+
+#outline-container-tributes p {
+    margin: 0;
+    font-size: 11px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#postamble {
+    order: 7;
     margin-top: 20px;
     padding-top: 15px;
     border-top: 1px #000 double;
