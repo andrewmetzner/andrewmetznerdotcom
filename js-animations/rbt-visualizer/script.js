@@ -109,7 +109,7 @@ function* recolorBatch(changes, label) {
 function* insertGen(name) {
     if (searchTree(root, name) !== TNULL) {
         setStatus(`"${name}" is already in the tree.`, 'warn');
-        log(`insert(${name}) — rejected, duplicate key`);
+        log(`insert(${name}) -- rejected, duplicate key`);
         return;
     }
 
