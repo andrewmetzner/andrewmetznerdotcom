@@ -6,7 +6,6 @@ html, body {
   padding: 0;
   overflow: hidden;
   overscroll-behavior: none;
-  touch-action: none;
   background: #b8b8b8;
   font-family: "Menlo", "DejaVu Sans Mono", "Consolas", "Courier New", monospace;
   font-size: 13px;
