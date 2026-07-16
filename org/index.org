@@ -39,7 +39,8 @@ Welcome. This page documents all of my research and academic work. It also stand
 :END:
 - [[./research/Fractals_%20Mathematical%20Foundations%20and%20Historical%20Evolution.pdf][Fractals: Mathematical Foundations and Historical Evolution]] \\
   Andrew Metzner \\
-  *Advisors*: Professor Vera Hu, Professor Krystyna Janicka-Wlodek, Maciej Wlodek, Ph.D.
+   /Suffolk County Community College Mathematics Department/ (SCCC) -- Undergraduate research \\
+  *Advisors*: Professor Vera Hu (SCCC); Professor Krystyna Janicka-Wlodek (SCCC); Maciej Wlodek, Ph.D.
 
 * Recent Reads
 :PROPERTIES:
