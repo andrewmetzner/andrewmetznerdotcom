@@ -6,6 +6,13 @@
     <atom:link href="https://andrewmetzner.com/readings.xml" rel="self" type="application/rss+xml" />
     <description>Books I've read, rated, and reviewed.</description>
     <language>en-us</language>
+    <image>
+      <url>https://andrewmetzner.com/favicon.png</url>
+      <title>Andrew Metzner: Readings</title>
+      <link>https://andrewmetzner.com/readings.html</link>
+      <width>32</width>
+      <height>32</height>
+    </image>
     <lastBuildDate>Sat, 25 Jul 2026 01:56:29 GMT</lastBuildDate>
 
     <item>

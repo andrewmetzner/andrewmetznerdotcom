@@ -286,13 +286,20 @@ change (and keep their cache while the files are unchanged)."
     <atom:link href=\"%s/readings.xml\" rel=\"self\" type=\"application/rss+xml\" />
     <description>Books I've read, rated, and reviewed.</description>
     <language>en-us</language>
+    <image>
+      <url>%s/favicon.png</url>
+      <title>Andrew Metzner: Readings</title>
+      <link>%s/readings.html</link>
+      <width>32</width>
+      <height>32</height>
+    </image>
     <lastBuildDate>%s</lastBuildDate>
 
 %s
   </channel>
 </rss>
 "
-                      amz-site amz-site built items)))
+                      amz-site amz-site amz-site amz-site built items)))
     (message "Wrote readings.xml")))
 
 ;;; fragment on home
