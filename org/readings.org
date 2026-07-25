@@ -6,10 +6,11 @@
 # offset (2026-07-10T02:09:38-04:00). Blank is allowed too.
 # Rebuild with:  emacs --batch -l build/readings.el   (or build/build.el)
 
-# * The Tibetan Yogas of Dream and Sleep
-# :PROPERTIES:
-# :AUTHOR: Tenzin Wangyal Rinpoche
-# :DATE: 
-# :STARS:
-# :END:
-# Hello world
+* The Tibetan Yogas of Dream and Sleep
+:PROPERTIES:
+:AUTHOR: T. Wangyal
+:DATE: 2026-07-24T21:56:29-04:00
+:STARS: 3.5
+:END:
+
+A good overview of Tibetan Buddhist thinking. In relation to sleep, it claimed to be a requirement to know Dzogchen practices or thought; I did not struggle to understand. Book can be somewhat underwhelming if you've read enough on dreams/sleep, trance, or meditation.

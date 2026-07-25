@@ -6,8 +6,14 @@
     <atom:link href="https://andrewmetzner.com/readings.xml" rel="self" type="application/rss+xml" />
     <description>Books I've read, rated, and reviewed.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Jul 2026 16:57:44 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2026 01:56:29 GMT</lastBuildDate>
 
-
+    <item>
+      <title>T. Wangyal, "The Tibetan Yogas of Dream and Sleep" (3.5/5)</title>
+      <link>https://andrewmetzner.com/readings.html</link>
+      <guid isPermaLink="false">andrewmetzner.com/readings/t-wangyal-the-tibetan-yogas-of-dream-and-sleep</guid>
+      <pubDate>Sat, 25 Jul 2026 01:56:29 GMT</pubDate>
+      <description>A good overview of Tibetan Buddhist thinking. In relation to sleep, it claimed to be a requirement to know Dzogchen practices or thought; I did not struggle to understand. Book can be somewhat underwhelming if you've read enough on dreams/sleep, trance, or meditation.</description>
+    </item>
   </channel>
 </rss>

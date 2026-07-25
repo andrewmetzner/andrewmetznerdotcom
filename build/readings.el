@@ -41,6 +41,10 @@
           (org-ascii-links-to-notes nil))
       (string-trim (org-export-string-as s 'ascii t)))))
 
+(defun amz-round-half (n)
+  "Round N to the nearest 0.5."
+  (/ (fround (* n 2)) 2.0))
+
 (defun amz-load-readings ()
   (let (raw)
     (with-temp-buffer
@@ -51,7 +55,7 @@
          (push (list :date   (or (org-entry-get nil "DATE") "")
                      :author (or (org-entry-get nil "AUTHOR") "")
                      :title  (org-get-heading t t t t)
-                     :stars  (string-to-number (or (org-entry-get nil "STARS") "0"))
+                     :stars  (amz-round-half (string-to-number (or (org-entry-get nil "STARS") "0")))
                      :body   (amz-entry-body))
                raw))
        nil nil))
@@ -128,6 +132,68 @@ change (and keep their cache while the files are unchanged)."
             (replace-match (format "\"%s?v=%s\"" (car a) (cdr a)) t t))))
       (write-region (point-min) (point-max) html-file nil 'silent))))
 
+;;; Star ratings (svg, half-star capable)
+
+(defvar amz-star-offsets
+  ;; (dx . dy) points of a single 5-point star, relative to its center,
+  ;; matching the geometry of the original hand-drawn img/stars-blue-*.svg.
+  '((0.00 . 0.80) (1.94 . 6.33) (7.80 . 6.47) (3.14 . 10.02) (4.82 . 15.63)
+    (0.00 . 12.30) (-4.82 . 15.63) (-3.14 . 10.02) (-7.80 . 6.47) (-1.94 . 6.33)))
+
+(defvar amz-star-centers '(9 27 45 63 81))
+
+(defvar amz-star-files-written (make-hash-table :test 'equal)
+  "Ratings (as their filename slug) already flushed to img/ this run.")
+
+(defun amz-format-rating (rating)
+  "RATING as \"3\" or \"3.5\" for display and filenames."
+  (if (= rating (truncate rating))
+      (number-to-string (truncate rating))
+    (format "%.1f" rating)))
+
+(defun amz-star-points (cx)
+  (mapconcat (lambda (p) (format "%.2f,%.2f" (+ cx (car p)) (cdr p)))
+             amz-star-offsets " "))
+
+(defun amz-star-polygon (cx fill stroke)
+  (format "<polygon points=\"%s\" fill=\"%s\" stroke=\"%s\" stroke-width=\"0.8\" stroke-linejoin=\"round\"/>"
+          (amz-star-points cx) fill stroke))
+
+(defun amz-star-half (cx idx)
+  "A half-filled star at CX: empty star behind, filled star clipped to its left half."
+  (let ((clip-id (format "star-clip-%d" idx)))
+    (format "<defs><clipPath id=\"%s\"><rect x=\"%.2f\" y=\"0\" width=\"7.8\" height=\"18\"/></clipPath></defs>\n  %s\n  <g clip-path=\"url(#%s)\">%s</g>"
+            clip-id (- cx 7.8)
+            (amz-star-polygon cx "#e7ded3" "#9aa7b0")
+            clip-id
+            (amz-star-polygon cx "#1f5f8b" "#1f5f8b"))))
+
+(defun amz-stars-svg (rating)
+  "Build the stars-row svg markup for RATING (0-5, half-steps allowed)."
+  (let* ((full (floor rating))
+         (has-half (>= (- rating full) 0.5))
+         (idx 0)
+         (body (mapconcat
+                (lambda (cx)
+                  (setq idx (1+ idx))
+                  (cond ((<= idx full) (amz-star-polygon cx "#1f5f8b" "#1f5f8b"))
+                        ((and has-half (= idx (1+ full))) (amz-star-half cx idx))
+                        (t (amz-star-polygon cx "#e7ded3" "#9aa7b0"))))
+                amz-star-centers "\n  ")))
+    (format "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 90 18\" width=\"90\" height=\"18\" role=\"img\" aria-label=\"%s out of 5 stars\">\n  %s\n</svg>\n"
+            (amz-format-rating rating) body)))
+
+(defun amz-star-src (rating)
+  "Ensure img/stars-blue-<rating>.svg exists for RATING and return its filename."
+  (let* ((slug (amz-format-rating rating))
+         (fname (format "stars-blue-%s.svg" slug)))
+    (unless (gethash slug amz-star-files-written)
+      (let ((path (amz-out (concat "img/" fname))))
+        (make-directory (file-name-directory path) t)
+        (with-temp-file path (insert (amz-stars-svg rating))))
+      (puthash slug t amz-star-files-written))
+    fname))
+
 ;;; Reading
 
 (defun amz-reading-html (e)
@@ -139,13 +205,13 @@ change (and keep their cache while the files are unchanged)."
     <div class=\"reading-row\">
       <span class=\"reading-date\"><time datetime=\"%s\">%s%s</time></span>
       <span class=\"reading-title\">%s, <cite>%s</cite></span>
-      <span class=\"reading-rating\"><img class=\"stars\" src=\"img/stars-blue-%d.svg\" width=\"90\" height=\"18\" alt=\"%d out of 5 stars\" /></span>
+      <span class=\"reading-rating\"><img class=\"stars\" src=\"img/%s\" width=\"90\" height=\"18\" alt=\"%s out of 5 stars\" /></span>
     </div>
     <div class=\"reading-review\">%s</div>
   </article>"
             raw (amz-date-part raw) time-html
             (amz-esc (plist-get e :author)) (amz-esc (plist-get e :title))
-            (plist-get e :stars) (plist-get e :stars)
+            (amz-star-src (plist-get e :stars)) (amz-format-rating (plist-get e :stars))
             (plist-get e :html))))
 
 (defun amz-build-html (readings)
@@ -195,14 +261,14 @@ change (and keep their cache while the files are unchanged)."
 
 (defun amz-reading-rss (e)
   (format "    <item>
-      <title>%s, \"%s\" (%d/5)</title>
+      <title>%s, \"%s\" (%s/5)</title>
       <link>%s/readings.html</link>
       <guid isPermaLink=\"false\">andrewmetzner.com/readings/%s</guid>
       <pubDate>%s</pubDate>
       <description>%s</description>
     </item>"
           (amz-esc (plist-get e :author)) (amz-esc (plist-get e :title))
-          (plist-get e :stars)
+          (amz-format-rating (plist-get e :stars))
           amz-site
           (amz-slug (concat (plist-get e :author) "-" (plist-get e :title)))
           (amz-rfc822 (plist-get e :date))
@@ -232,10 +298,10 @@ change (and keep their cache while the files are unchanged)."
 ;;; fragment on home
 
 (defun amz-recent-item (e)
-  (format "  <li><span class=\"recent-date\">%s</span> %s, <cite>%s</cite> <img class=\"stars stars-sm\" src=\"img/stars-blue-%d.svg\" width=\"72\" height=\"14\" alt=\"%d out of 5 stars\" /></li>"
+  (format "  <li><span class=\"recent-date\">%s</span> %s, <cite>%s</cite> <img class=\"stars stars-sm\" src=\"img/%s\" width=\"72\" height=\"14\" alt=\"%s out of 5 stars\" /></li>"
           (amz-date-part (plist-get e :date))
           (amz-esc (plist-get e :author)) (amz-esc (plist-get e :title))
-          (plist-get e :stars) (plist-get e :stars)))
+          (amz-star-src (plist-get e :stars)) (amz-format-rating (plist-get e :stars))))
 
 (defun amz-build-recent (readings)
   (let* ((recent (cl-subseq readings 0 (min amz-recent-count (length readings))))
