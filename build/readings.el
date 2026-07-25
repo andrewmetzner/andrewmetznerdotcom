@@ -275,8 +275,12 @@ change (and keep their cache while the files are unchanged)."
           (amz-esc (plist-get e :text))))
 
 (defun amz-build-rss (readings)
-  (let ((items (mapconcat #'amz-reading-rss readings "\n\n"))
-        (built (amz-rfc822 (plist-get (car readings) :date))))
+  (let* ((items (mapconcat #'amz-reading-rss readings "\n\n"))
+         (built (amz-rfc822 (plist-get (car readings) :date)))
+         (favicon-hash (amz-file-hash (amz-out "favicon.png")))
+         (favicon-url (if favicon-hash
+                           (format "%s/favicon.png?v=%s" amz-site favicon-hash)
+                         (format "%s/favicon.png" amz-site))))
     (with-temp-file (amz-out "readings.xml")
       (insert (format "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">
@@ -287,7 +291,7 @@ change (and keep their cache while the files are unchanged)."
     <description>Books I've read, rated, and reviewed.</description>
     <language>en-us</language>
     <image>
-      <url>%s/favicon.png</url>
+      <url>%s</url>
       <title>Andrew Metzner: Readings</title>
       <link>%s/readings.html</link>
       <width>32</width>
@@ -299,7 +303,7 @@ change (and keep their cache while the files are unchanged)."
   </channel>
 </rss>
 "
-                      amz-site amz-site amz-site amz-site built items)))
+                      amz-site amz-site favicon-url amz-site built items)))
     (message "Wrote readings.xml")))
 
 ;;; fragment on home
