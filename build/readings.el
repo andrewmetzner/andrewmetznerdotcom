@@ -120,9 +120,10 @@ Falls back to the current time when DATE is missing or blank."
   "Append a content-hash ?v= query to the CSS and favicon references in
 HTML-FILE so browsers and home-screen apps refetch them the moment the files
 change (and keep their cache while the files are unchanged)."
-  (let ((assets (list (cons "Dreamsongs.css" (amz-file-hash (amz-out "Dreamsongs.css")))
-                      (cons "favicon.png"    (amz-file-hash (amz-out "favicon.png")))
-                      (cons "favicon.ico"    (amz-file-hash (amz-out "favicon.ico"))))))
+  (let ((assets (list (cons "Dreamsongs.css"       (amz-file-hash (amz-out "Dreamsongs.css")))
+                      (cons "favicon.png"          (amz-file-hash (amz-out "favicon.png")))
+                      (cons "favicon.ico"          (amz-file-hash (amz-out "favicon.ico")))
+                      (cons "apple-touch-icon.png" (amz-file-hash (amz-out "apple-touch-icon.png"))))))
     (with-temp-buffer
       (insert-file-contents html-file)
       (dolist (a assets)
@@ -235,14 +236,15 @@ change (and keep their cache while the files are unchanged)."
 <link rel=\"alternate\" type=\"application/rss+xml\" title=\"Andrew Metzner: Readings\" href=\"%s/readings.xml\" />
 <meta property=\"og:title\" content=\"Readings, Andrew Metzner\" />
 <meta property=\"og:description\" content=\"Books I've read, rated, and reviewed.\" />
-<meta property=\"og:image\" content=\"%s/og-image.png\" />
+<meta property=\"og:image\" content=\"%s/img/og-nullpo.png\" />
 <meta property=\"og:url\" content=\"%s/readings.html\" />
 <meta property=\"og:type\" content=\"website\" />
 <meta name=\"twitter:card\" content=\"summary_large_image\" />
-<meta name=\"twitter:image\" content=\"%s/og-image.png\" />
+<meta name=\"twitter:image\" content=\"%s/img/og-nullpo.png\" />
 <link rel=\"stylesheet\" type=\"text/css\" href=\"Dreamsongs.css\" />
 <link rel=\"icon\" type=\"image/png\" href=\"favicon.png\" />
 <link rel=\"icon\" type=\"image/x-icon\" href=\"favicon.ico\" />
+<link rel=\"apple-touch-icon\" href=\"apple-touch-icon.png\" />
 </head>
 <body>
 <p>[ <a href=\"index.html\">go home</a> // <a href=\"readings.xml\">rss GET</a> ]</p>
@@ -283,13 +285,16 @@ change (and keep their cache while the files are unchanged)."
                          (format "%s/favicon.png" amz-site))))
     (with-temp-file (amz-out "readings.xml")
       (insert (format "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">
+<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:webfeeds=\"http://webfeeds.org/rss/1.0\">
   <channel>
     <title>Andrew Metzner: Readings</title>
     <link>%s/readings.html</link>
     <atom:link href=\"%s/readings.xml\" rel=\"self\" type=\"application/rss+xml\" />
     <description>Books I've read, rated, and reviewed.</description>
     <language>en-us</language>
+    <!-- webfeeds:icon wins over <image> and over anything a reader scrapes
+         from the home page, so readers never fall back to the og: image. -->
+    <webfeeds:icon>%s</webfeeds:icon>
     <image>
       <url>%s</url>
       <title>Andrew Metzner: Readings</title>
@@ -303,7 +308,7 @@ change (and keep their cache while the files are unchanged)."
   </channel>
 </rss>
 "
-                      amz-site amz-site favicon-url amz-site built items)))
+                      amz-site amz-site favicon-url favicon-url amz-site built items)))
     (message "Wrote readings.xml")))
 
 ;;; fragment on home
