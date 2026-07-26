@@ -234,7 +234,7 @@ change (and keep their cache while the files are unchanged)."
 <meta name=\"author\" content=\"Andrew Metzner\" />
 <meta name=\"description\" content=\"Books Andrew Metzner has read, with ratings and short takes.\" />
 <link rel=\"alternate\" type=\"application/rss+xml\" title=\"Andrew Metzner: Readings\" href=\"%s/readings.xml\" />
-<meta property=\"og:title\" content=\"Readings, Andrew Metzner\" />
+<meta property=\"og:title\" content=\"Recent books I've read; Andrew Metzner\" />
 <meta property=\"og:description\" content=\"Books I've read, rated, and reviewed.\" />
 <meta property=\"og:image\" content=\"%s/img/og-nullpo.png\" />
 <meta property=\"og:url\" content=\"%s/readings.html\" />
