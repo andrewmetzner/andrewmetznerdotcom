@@ -316,17 +316,68 @@ function refreshStats() {
 }
 
 const R = 22;
+const LEVEL_HEIGHT = 120;
+const SUBTREE_GAP = 30;
+const MIN_CHILD_SEP = 90;
+const LABEL_FONT = 'bold 13px "Courier New", monospace';
 
-function computeLayout(node, x, y, offset, map) {
-    if (node === TNULL) return;
+const labelWidthCache = new Map();
+
+function halfWidth(node) {
+    let w = labelWidthCache.get(node.name);
+    if (w === undefined) {
+        ctx.save();
+        ctx.font = LABEL_FONT;
+        w = ctx.measureText(node.name).width;
+        ctx.restore();
+        labelWidthCache.set(node.name, w);
+    }
+    return Math.max(R, w / 2);
+}
+
+// Returns the subtree's contour: per depth, the [l, r] extent relative to node's x.
+// Sibling subtrees are pushed apart until their contours clear at every shared depth.
+function layoutSubtree(node, offsets) {
+    const hw = halfWidth(node);
+    const contour = [{ l: -hw, r: hw }];
+    const lc = node.left !== TNULL ? layoutSubtree(node.left, offsets) : null;
+    const rc = node.right !== TNULL ? layoutSubtree(node.right, offsets) : null;
+    if (!lc && !rc) return contour;
+
+    let sep = MIN_CHILD_SEP;
+    if (lc && rc) {
+        for (let i = 0; i < Math.min(lc.length, rc.length); i++) {
+            sep = Math.max(sep, lc[i].r - rc[i].l + SUBTREE_GAP);
+        }
+    }
+    const dl = -sep / 2, dr = sep / 2;
+    offsets.set(node, { dl, dr });
+
+    const depth = Math.max(lc ? lc.length : 0, rc ? rc.length : 0);
+    for (let i = 0; i < depth; i++) {
+        const a = lc && lc[i], b = rc && rc[i];
+        contour.push({
+            l: Math.min(a ? a.l + dl : Infinity, b ? b.l + dr : Infinity),
+            r: Math.max(a ? a.r + dl : -Infinity, b ? b.r + dr : -Infinity),
+        });
+    }
+    return contour;
+}
+
+function placeSubtree(node, x, y, offsets, map) {
     map.set(node, { x, y });
-    if (node.left !== TNULL) computeLayout(node.left, x - offset, y + 120, offset / 1.6, map);
-    if (node.right !== TNULL) computeLayout(node.right, x + offset, y + 120, offset / 1.6, map);
+    const o = offsets.get(node);
+    if (!o) return;
+    if (node.left !== TNULL) placeSubtree(node.left, x + o.dl, y + LEVEL_HEIGHT, offsets, map);
+    if (node.right !== TNULL) placeSubtree(node.right, x + o.dr, y + LEVEL_HEIGHT, offsets, map);
 }
 
 function layoutRoot() {
     const map = new Map();
-    if (root !== TNULL) computeLayout(root, 0, 0, 200, map);
+    if (root === TNULL) return map;
+    const offsets = new Map();
+    layoutSubtree(root, offsets);
+    placeSubtree(root, 0, 0, offsets, map);
     return map;
 }
 
@@ -394,7 +445,7 @@ function drawNodeAt(node, sx, sy, effect) {
 
     ctx.fillStyle = '#111827';
     ctx.textAlign = 'center';
-    ctx.font = 'bold 13px "Courier New", monospace';
+    ctx.font = LABEL_FONT;
     ctx.fillText(node.name, sx, sy + (R * 2) + 15);
     ctx.restore();
 }
