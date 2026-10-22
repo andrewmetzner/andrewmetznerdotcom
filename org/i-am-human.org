@@ -1,0 +1,52 @@
+#+TITLE: Certified I am a human
+#+AUTHOR: Andrew Metzner
+#+OPTIONS: toc:nil num:nil html5-fancy:t
+#+HTML_DOCTYPE: html5
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="Dreamsongs.css" />
+#+HTML_HEAD: <link rel="icon" type="image/png" href="favicon.png" />
+#+HTML_HEAD: <link rel="icon" type="image/x-icon" href="favicon.ico" />
+#+HTML_HEAD: <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+#+HTML_HEAD: <meta name="description" content="Photos of Andrew Metzner I AM A HUMAN" />
+#+HTML_HEAD: <meta property="og:title" content="Certified I am a human; Andrew Metzner" />
+#+HTML_HEAD: <meta property="og:description" content="Proof there is a human behind this site." />
+#+HTML_HEAD: <meta property="og:image" content="https://andrewmetzner.com/img/og-nullpo.png" />
+#+HTML_HEAD: <meta property="og:url" content="https://andrewmetzner.com/i-am-human.html" />
+#+HTML_HEAD: <meta property="og:type" content="website" />
+#+HTML_HEAD: <meta name="twitter:card" content="summary_large_image" />
+#+HTML_HEAD: <meta name="twitter:image" content="https://andrewmetzner.com/img/og-nullpo.png" />
+
+
+[ [[./index.html][go home]] ]
+
+In the agentic era of the internet, we probably need more verification of humanity everyday.
+
+#+BEGIN_photos
+#+CAPTION: Hello. This is me.
+#+ATTR_HTML: :alt Andrew in a plaid shirt in front of green leaves :width 800 :height 800 :loading lazy
+[[file:img/human/pic.jpg]]
+
+#+CAPTION: Out on a hike in the woods.
+#+ATTR_HTML: :alt Andrew in glasses and a dark jacket on a wooded trail :width 900 :height 1200 :loading lazy
+[[file:img/human/woods-closeup.jpg]]
+
+#+CAPTION: Standing on a rock.
+#+ATTR_HTML: :alt Andrew standing on a large boulder among bare trees :width 900 :height 1200 :loading lazy
+[[file:img/human/woods-rock.jpg]]
+
+#+CAPTION: Getting in-between an array of arrays of trees
+#+ATTR_HTML: :alt Andrew standing in the gap between three fused tall tree trunks :width 900 :height 1200 :loading lazy
+[[file:img/human/woods-trees.jpg]]
+
+#+CAPTION: Spare time animal training and rehabilitation
+#+ATTR_HTML: :alt Andrew and friend walking two dogs on a suburban street :width 1200 :height 900 :loading lazy
+[[file:img/human/dogs.jpg]]
+
+#+CAPTION: Writing on a chalkboard.
+#+ATTR_HTML: :alt Andrew in a blue cap writing on a chalkboard wall :width 675 :height 1200 :loading lazy
+[[file:img/human/chalkboard.jpg]]
+
+#+CAPTION: At the Big Duck.
+#+ATTR_HTML: :alt Selfie of Andrew and friend in front of a giant duck-shaped building :width 900 :height 1200 :loading lazy
+[[file:img/human/big-duck.jpg]]
+
+#+END_photos

@@ -22,7 +22,7 @@
 (dolist (type '("litecoin" "monero"))
   (org-link-set-parameters type))
 
-(defvar amz-pages '("index.org"))
+(defvar amz-pages '("index.org" "i-am-human.org"))
 
 (let* ((here (file-name-directory (or load-file-name buffer-file-name default-directory)))
        (root (expand-file-name ".." here))

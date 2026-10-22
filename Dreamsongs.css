@@ -470,3 +470,47 @@ hr.rule {
         font-size: 11px;
     }
 }
+
+.photos {
+    columns: 3 240px;
+    column-gap: 18px;
+}
+
+.photos figure {
+    break-inside: avoid;
+    margin: 0 0 22px 0;
+}
+
+.photos img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--text-color);
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.photos figcaption {
+    margin-top: 6px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.photos .figure-number {
+    display: none;
+}
+
+@media (max-width: 540px) {
+    .photos img {
+        width: auto;
+        max-width: 100%;
+        max-height: 70vh;
+        max-height: 70svh;
+        margin: 0 auto;
+    }
+
+    .photos figcaption {
+        text-align: center;
+    }
+}

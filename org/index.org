@@ -53,7 +53,7 @@ Welcome. This page documents all of my research and academic work. It also stand
 :PROPERTIES:
 :CUSTOM_ID: human
 :END:
-[[./im-a-human][Proof here]]
+[[./i-am-human.html][Proof here]]
 
 * send if you can, don't give your last
 :PROPERTIES:
